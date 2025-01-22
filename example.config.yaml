@@ -1,0 +1,9 @@
+monitoring:
+  items:
+    - SystemMonitor:
+        show_mem: true
+    - DiskMonitor:
+    - ServerInfo:
+        show_ip: true
+        iface: eth0
+  delay: 5

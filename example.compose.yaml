@@ -1,0 +1,13 @@
+---
+services:
+  raspberrypi-lcd-status:
+    build:
+      context: ./raspberrypi-lcd-status
+      dockerfile: Dockerfile  # Optional if your Dockerfile is named "Dockerfile"
+    network_mode: host  # Use host networking
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config/config.yaml:/etc/raspberrypi-lcd-status/config.yaml:ro
+    devices:
+      - /dev/i2c-1  # Device access for I2C
+    restart: unless-stopped  # Restart policy for the container
