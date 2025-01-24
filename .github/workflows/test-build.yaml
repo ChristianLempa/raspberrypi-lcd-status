@@ -1,0 +1,19 @@
+# .github/workflows/test-build.yml
+name: Test Docker Build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Build Docker Image
+        run: |
+          docker build -t raspberrypi-lcd-status:latest ./raspberrypi-lcd-status
