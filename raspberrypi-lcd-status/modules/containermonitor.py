@@ -1,5 +1,9 @@
 import docker
 from typing import Tuple, Optional
+from logmanager import configure_logger
+
+
+logger = configure_logger(__name__)
 
 
 class ContainerMonitor:
@@ -7,8 +11,10 @@ class ContainerMonitor:
     """Initialize the Docker client."""
 
     try:
-      self.client = docker.from_env()
-    except Exception:
+      self.client = docker.DockerClient(base_url='unix://var/run/docker.sock')
+      logger.info("Docker client initialized successfully.")
+    except Exception as e:
+      logger.error(f"Failed to initialize Docker client: {e}")
       self.client = None
 
   def __call__(self) -> Tuple[str, Optional[str]]:
@@ -30,11 +36,14 @@ class ContainerMonitor:
     try:
       self.client.ping()
       docker_engine_status = "running"
-    except Exception:
+      logger.info("Docker daemon is running.")
+    except Exception as e:
+      logger.error(f"Error pinging Docker daemon: {e}")
       return 0, 0, "stopped"
 
     containers = self.client.containers.list(all=True)
     running_count = sum(1 for container in containers if container.status == 'running')
     stopped_count = sum(1 for container in containers if container.status in ['exited', 'dead', 'created', 'paused'])
 
+    logger.info(f"Found {running_count} running and {stopped_count} stopped containers.")
     return running_count, stopped_count, docker_engine_status
