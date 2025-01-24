@@ -1,23 +1,25 @@
 import socket
 import psutil
+from typing import Tuple, Optional
+
 
 class ServerInfo:
-  def __init__(self, show_ip=False, iface="eth0"):
+  def __init__(self, show_ip: bool = False, iface: str = "eth0"):
     self.server_name = self.get_server_name()[:16]
     self.show_ip = show_ip
     self.ip_address = self.get_ip_address(iface) if show_ip else None
 
-  def __call__(self):
-    return f"{self.server_name}", f"{self.ip_address}" if self.show_ip else None
+  def __call__(self) -> Tuple[str, Optional[str]]:
+    """Return the server name and IP address if requested."""
+    return self.server_name, self.ip_address if self.show_ip else None
 
-  def get_server_name(self):
+  def get_server_name(self) -> str:
     """Retrieve the server name (hostname)."""
     return socket.gethostname()
 
-  def get_ip_address(self, interface):
-    """Retrieve the server's IP address."""
+  def get_ip_address(self, interface: str) -> str:
+    """Retrieve the server's IP address for the specified interface."""
     try:
-      # Get all network interfaces and their addresses
       addrs = psutil.net_if_addrs()
       if interface in addrs:
         for addr in addrs[interface]:

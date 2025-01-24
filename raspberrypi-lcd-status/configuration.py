@@ -1,17 +1,17 @@
 import os
 import yaml
+from typing import Dict, Any
+
 
 # Load configuration from YAML file
-def load_config(filename):
-  # Check if the file exists
+def load_config(filename: str) -> Dict[str, Any]:
+  """Load and return the monitoring configuration from a YAML file."""
   if not os.path.isfile(filename):
     raise FileNotFoundError(f"Configuration file '{filename}' not found.")
 
-  # Check if the file is not empty
   if os.path.getsize(filename) == 0:
     raise ValueError(f"Configuration file '{filename}' is empty.")
 
-  # Load and validate the YAML content
   try:
     with open(filename, 'r') as file:
       config = yaml.safe_load(file)

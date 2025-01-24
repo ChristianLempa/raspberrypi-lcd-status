@@ -6,4 +6,7 @@ monitoring:
     - ServerInfo:
         show_ip: true
         iface: eth0
+    - ContainerMonitor:
+    - TemperatureMonitor:
+    - KubernetesMonitor:
   delay: 5
