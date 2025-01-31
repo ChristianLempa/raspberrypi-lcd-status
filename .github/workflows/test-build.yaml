@@ -1,10 +1,11 @@
-# .github/workflows/test-build.yml
 name: Test Docker Build
 
 on:
   pull_request:
     branches:
       - main
+    paths:
+      - raspberrypi-lcd-status/**
 
 jobs:
   build:
