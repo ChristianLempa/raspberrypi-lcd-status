@@ -29,8 +29,8 @@ jobs:
         run: |
           docker buildx build \
             --platform linux/arm/v7,linux/arm64 \
-            -t ghcr.io/christianlempa/raspberrypi-lcd-status-test:${{ github.ref_name }} \
-            -t ghcr.io/christianlempa/raspberrypi-lcd-status-test:latest \
+            -t ghcr.io/christianlempa/raspberrypi-lcd-status:${{ github.ref_name }} \
+            -t ghcr.io/christianlempa/raspberrypi-lcd-status:latest \
             ./raspberrypi-lcd-status \
             --push
 
