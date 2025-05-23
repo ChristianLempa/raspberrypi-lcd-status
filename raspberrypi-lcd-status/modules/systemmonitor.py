@@ -1,23 +1,23 @@
 import psutil
-from typing import Tuple, Optional
+from typing import Tuple
 
 
 class SystemMonitor:
-  def __init__(self, show_mem: bool = True):
-    self.show_mem = show_mem
+  def __init__(self):
+    pass
 
-  def __call__(self) -> Tuple[str, Optional[str]]:
-    """Return CPU load and memory utilization if requested."""
-    cpu_output = self.get_cpu_load()
-    mem_output = self.get_memory_utilization() if self.show_mem else None
+  def __call__(self) -> Tuple[str, str]:
+    """Return CPU utilization and load average."""
+    cpu_output = self.get_cpu_utilization()
+    load_output = self.get_cpu_load_average()
 
-    return cpu_output, mem_output
+    return cpu_output, load_output
 
-  def get_cpu_load(self) -> str:
-    """Retrieve the current CPU load percentage."""
+  def get_cpu_utilization(self) -> str:
+    """Retrieve the current CPU utilization percentage."""
     return f'CPU: {psutil.cpu_percent(interval=1)}%'
 
-  def get_memory_utilization(self) -> str:
-    """Retrieve the current memory utilization percentage."""
-    mem = psutil.virtual_memory()
-    return f'Mem: {mem.percent}%'
+  def get_cpu_load_average(self) -> str:
+    """Retrieve the current CPU load average (1 and 5 min)."""
+    load1, load5, _ = psutil.getloadavg()
+    return f'Load: {load1:.1f}/{load5:.1f}'
