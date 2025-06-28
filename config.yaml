@@ -1,0 +1,12 @@
+monitoring:
+  items:
+    - SystemMonitor:
+    - MemoryMonitor:
+    - DiskMonitor:
+    - ServerInfo:
+        show_ip: true
+        iface: end0
+    - ContainerMonitor:
+    - TemperatureMonitor:
+    # - KubernetesMonitor:
+  delay: 5

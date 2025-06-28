@@ -1,0 +1,14 @@
+---
+services:
+  raspberrypi-lcd-status:
+    image: bluepi-lcd
+    container_name: raspberrypi-lcd-status
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      # - /etc/rancher/k3s/k3s.yaml:/etc/rancher/k3s/k3s.yaml:ro
+      - /sys/devices/virtual/thermal/thermal_zone0/temp:/sys/devices/virtual/thermal/thermal_zone0/temp:ro
+      - /usr/local/share/docker_files/lcd/raspberrypi-lcd-status/config.yaml:/etc/raspberrypi-lcd-status/config.yaml:ro
+    devices:
+      - /dev/i2c-1
+    restart: unless-stopped
