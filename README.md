@@ -4,7 +4,8 @@ The RaspberryPi LCD Status Monitor is a simple app, that prints useful informati
 
 ## Features
 
-- **SystemMonitor:** Prints the CPU and RAM usage
+- **SystemMonitor:** Prints the CPU load average and utilization
+- **MemoryMonitor:** Prints the memory usage and free memory amount
 - **DiskMonitor:** Prints the Disk Size and Usage
 - **ServerInfo:** Prints the IP Address and Hostname
 - **ContainerMonitor:** Prints the number of running and stopped Containers

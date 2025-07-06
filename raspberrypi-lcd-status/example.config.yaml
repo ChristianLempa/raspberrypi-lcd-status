@@ -1,0 +1,18 @@
+monitoring:
+  # Time in seconds between display updates
+  delay: 3
+  
+  # List of monitors to cycle through
+  items:
+    # System Monitor - displays CPU load average and utilization
+    - SystemMonitor: {}
+    
+    # Memory Monitor - displays memory usage percentage and free memory
+    - MemoryMonitor: {}
+    
+    # Additional monitors can be added here
+    # - DiskMonitor: {}
+    # - TemperatureMonitor: {}
+    # - ContainerMonitor: {}
+    # - KubernetesMonitor: {}
+    # - ServerInfo: {}

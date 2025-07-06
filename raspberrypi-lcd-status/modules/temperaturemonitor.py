@@ -3,8 +3,16 @@ from typing import Optional
 
 
 class TemperatureMonitor:
-  def __init__(self):
-    pass
+  def __init__(self, **kwargs):
+    """Initialize TemperatureMonitor.
+    
+    Args:
+        **kwargs: Additional keyword arguments (ignored for backward compatibility)
+    """
+    # Log any unrecognized parameters for debugging
+    if kwargs:
+      unrecognized_params = list(kwargs.keys())
+      print(f"INFO: TemperatureMonitor ignoring unrecognized parameters: {unrecognized_params}")
 
   def __call__(self) -> Optional[float]:
     """Return the temperature if requested."""

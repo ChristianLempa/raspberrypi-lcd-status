@@ -3,8 +3,16 @@ from typing import Tuple
 
 
 class DiskMonitor:
-  def __init__(self):
-    pass
+  def __init__(self, **kwargs):
+    """Initialize DiskMonitor.
+    
+    Args:
+        **kwargs: Additional keyword arguments (ignored for backward compatibility)
+    """
+    # Log any unrecognized parameters for debugging
+    if kwargs:
+      unrecognized_params = list(kwargs.keys())
+      print(f"INFO: DiskMonitor ignoring unrecognized parameters: {unrecognized_params}")
 
   def __call__(self) -> Tuple[str, str]:
     """Return disk usage statistics."""

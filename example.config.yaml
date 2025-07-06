@@ -1,7 +1,7 @@
 monitoring:
   items:
     - SystemMonitor:
-        show_mem: true
+    - MemoryMonitor:
     - DiskMonitor:
     - ServerInfo:
         show_ip: true

@@ -3,8 +3,17 @@ from typing import Tuple, Optional
 
 
 class KubernetesMonitor:
-  def __init__(self):
-    """Initialize the Kubernetes client."""
+  def __init__(self, **kwargs):
+    """Initialize the Kubernetes client.
+    
+    Args:
+        **kwargs: Additional keyword arguments (ignored for backward compatibility)
+    """
+    # Log any unrecognized parameters for debugging
+    if kwargs:
+      unrecognized_params = list(kwargs.keys())
+      print(f"INFO: KubernetesMonitor ignoring unrecognized parameters: {unrecognized_params}")
+    
     try:
       config.load_kube_config("/etc/rancher/k3s/k3s.yaml")
       self.api = client.CoreV1Api()

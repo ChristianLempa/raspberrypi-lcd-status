@@ -64,8 +64,23 @@ def update_lcd(config: dict) -> None:
 
       except ImportError as e:
         print(f'Module {item} not found: {str(e)}')
+        # Display error on LCD for debugging
+        lcd.write_string(f'Module Error')
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string(f'{monitor_name} missing')
+      except TypeError as e:
+        print(f'Configuration error for {monitor_name}: {str(e)}')
+        print(f'This may be due to deprecated or invalid configuration parameters.')
+        # Display error on LCD for debugging
+        lcd.write_string(f'Config Error')
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string(f'{monitor_name} config')
       except Exception as e:
-        print(f'Error: {str(e)}')
+        print(f'Error with {monitor_name}: {str(e)}')
+        # Display error on LCD for debugging
+        lcd.write_string(f'Monitor Error')
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string(f'{monitor_name} failed')
 
       time.sleep(delay)  # Delay between updates
 

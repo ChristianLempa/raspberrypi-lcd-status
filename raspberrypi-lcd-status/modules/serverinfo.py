@@ -4,10 +4,22 @@ from typing import Tuple, Optional
 
 
 class ServerInfo:
-  def __init__(self, show_ip: bool = False, iface: str = "eth0"):
+  def __init__(self, show_ip: bool = False, iface: str = "eth0", **kwargs):
+    """Initialize ServerInfo.
+    
+    Args:
+        show_ip: Whether to display IP address
+        iface: Network interface to get IP from
+        **kwargs: Additional keyword arguments (ignored for backward compatibility)
+    """
     self.server_name = self.get_server_name()[:16]
     self.show_ip = show_ip
     self.ip_address = self.get_ip_address(iface) if show_ip else None
+    
+    # Log any unrecognized parameters for debugging
+    if kwargs:
+      unrecognized_params = list(kwargs.keys())
+      print(f"INFO: ServerInfo ignoring unrecognized parameters: {unrecognized_params}")
 
   def __call__(self) -> Tuple[str, Optional[str]]:
     """Return the server name and IP address if requested."""

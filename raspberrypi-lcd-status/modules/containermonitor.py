@@ -7,8 +7,16 @@ logger = configure_logger(__name__)
 
 
 class ContainerMonitor:
-  def __init__(self):
-    """Initialize the Docker client."""
+  def __init__(self, **kwargs):
+    """Initialize the Docker client.
+    
+    Args:
+        **kwargs: Additional keyword arguments (ignored for backward compatibility)
+    """
+    # Log any unrecognized parameters for debugging
+    if kwargs:
+      unrecognized_params = list(kwargs.keys())
+      print(f"INFO: ContainerMonitor ignoring unrecognized parameters: {unrecognized_params}")
 
     try:
       self.client = docker.DockerClient(base_url='unix://var/run/docker.sock')
